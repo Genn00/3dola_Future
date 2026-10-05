@@ -72,6 +72,12 @@ h1{font-size:clamp(38px,8vw,60px);line-height:1;font-weight:800;margin-bottom:14
 .exchange-option{border:0;background:transparent;color:#656d7c;font-size:11px;padding:5px 10px;border-radius:8px;cursor:pointer;transition:all .2s ease}
 .exchange-option.active{background:#171a20;color:#f5f7fb}
 .exchange-option:hover{color:#fff}
+.code-box{display:flex;align-items:center;justify-content:center;gap:12px;width:fit-content;max-width:100%;margin:-8px auto 20px;padding:9px 12px 9px 16px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:border-color .2s ease,background .2s ease}
+.code-box:hover{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.07)}
+.code-label{font-size:10px;letter-spacing:2px;color:#7f899b}
+.code-value{font-family:Consolas,"Courier New",monospace;font-size:15px;font-weight:700;letter-spacing:2px;color:#fff}
+.code-copy{min-width:52px;font-size:11px;color:#9da6b7;padding:4px 8px;border-radius:7px;background:rgba(255,255,255,.08);transition:color .2s ease}
+.code-box.copied .code-copy{color:#6ee7c8}
 .hint{margin-top:18px;color:#656d7c;font-size:11px}
 .notice{margin:0 auto 22px;padding:0 56px;color:#8f99ad;font-size:11px;line-height:1.6}
 .social{display:flex;justify-content:center;margin-top:22px}
@@ -171,7 +177,8 @@ h1{font-size:clamp(38px,8vw,60px);line-height:1;font-weight:800;margin-bottom:14
    <div class="badge">PROP FIRM</div>
    <h2>Funding Pips</h2>
    <p>Prop firm trading with Funding Pips.</p>
-   <div class="commission">&nbsp;</div>
+   <div class="commission">10% price discount</div>
+   <div class="code-box" id="codeBox" role="button" tabindex="0" aria-label="Copy referral code 8K2LSWQI"><span class="code-label">CODE</span><span class="code-value">8K2LSWQI</span><span class="code-copy" id="codeCopy">Copy</span></div>
    <a class="btn fundingpips" href="https://app.fundingpips.com/register?referral_code=8K2LSWQI" target="_blank" rel="noopener noreferrer">Go to exchange</a>
   </div>
  </section>
@@ -212,6 +219,38 @@ function setMode(mode){
  vantageCard.style.display=forex?"block":"none";
  propCard.style.display=prop?"block":"none";
 }
+
+const codeBox=document.getElementById("codeBox");
+const codeCopy=document.getElementById("codeCopy");
+let codeTimer=null;
+function copyText(t){
+ if(navigator.clipboard&&window.isSecureContext){
+  return navigator.clipboard.writeText(t);
+ }
+ return new Promise((res,rej)=>{
+  try{
+   const ta=document.createElement("textarea");
+   ta.value=t;ta.setAttribute("readonly","");
+   ta.style.cssText="position:fixed;top:0;left:0;opacity:0";
+   document.body.appendChild(ta);ta.select();
+   const ok=document.execCommand("copy");
+   document.body.removeChild(ta);
+   ok?res():rej();
+  }catch(e){rej(e)}
+ });
+}
+function doCopy(){
+ copyText("8K2LSWQI").then(()=>{
+  codeBox.classList.add("copied");codeCopy.textContent="Copied!";
+ }).catch(()=>{
+  codeCopy.textContent="Press Ctrl+C";
+ }).finally(()=>{
+  clearTimeout(codeTimer);
+  codeTimer=setTimeout(()=>{codeBox.classList.remove("copied");codeCopy.textContent="Copy"},1600);
+ });
+}
+codeBox.addEventListener("click",doCopy);
+codeBox.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();doCopy()}});
 
 document.querySelectorAll(".pending-link").forEach(link=>link.addEventListener("click",e=>e.preventDefault()));
 
