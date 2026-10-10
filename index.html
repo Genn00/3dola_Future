@@ -52,7 +52,7 @@ h1{font-size:clamp(38px,8vw,60px);line-height:1;font-weight:800;margin-bottom:14
 
 /* Exchange introduction window */
 .card{
- position:relative;overflow:hidden;padding:42px 34px 36px;border:1px solid rgba(255,255,255,.1);
+ position:relative;padding:42px 34px 36px;border:1px solid rgba(255,255,255,.1);
  border-radius:26px;background:rgba(18,21,29,.76);backdrop-filter:blur(16px);
  box-shadow:0 20px 60px rgba(0,0,0,.35);transition:.25s ease;min-height:330px
 }
@@ -205,6 +205,20 @@ html:not([lang="en"]) .option{font-size:15px}
 .sup-tg:hover{background:#229ed9}
 .sup-tg svg{width:18px;height:18px}
 @media(max-width:500px){.sup{right:14px;bottom:14px}.sup-fab{width:54px;height:54px}.sup-panel{bottom:66px}.sup-title{font-size:17px}}
+
+/* Info (spot / futures) tooltip */
+.info-wrap{position:absolute;top:14px;right:14px;z-index:5}
+.info-btn{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;color:#60636a;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:color .2s ease}
+.info-btn svg{width:26px;height:26px;display:block}
+.info-wrap:hover .info-btn,.info-wrap.on .info-btn,.info-btn:focus-visible{color:#c4cad6}
+.info-btn:focus-visible{outline:2px solid rgba(255,255,255,.4);outline-offset:1px}
+.info-tip{position:absolute;right:-4px;bottom:calc(100% + 10px);display:grid;grid-template-columns:auto auto;gap:4px 16px;padding:10px 14px;border:1px solid rgba(255,255,255,.2);border-radius:10px;background:#0c0e14;box-shadow:0 12px 32px rgba(0,0,0,.6);font-size:13px;line-height:1.3;white-space:nowrap;text-align:left;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s ease,transform .15s ease,visibility .15s;pointer-events:none}
+.info-tip::after{content:"";position:absolute;right:14px;top:100%;width:8px;height:8px;margin-top:-5px;background:#0c0e14;border-right:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.2);transform:rotate(45deg)}
+.info-tip span{color:#9da6b7}
+.info-tip b{color:#fff;font-weight:700;text-align:right}
+.info-wrap:hover .info-tip,.info-wrap:focus-within .info-tip,.info-wrap.on .info-tip{opacity:1;visibility:visible;transform:none}
+.card:has(.info-wrap:hover),.card:has(.info-wrap:focus-within),.card:has(.info-wrap.on){z-index:20}
+@media(max-width:500px){.info-wrap{top:10px;right:10px}}
 </style>
 </head>
 <body>
@@ -232,6 +246,7 @@ html:not([lang="en"]) .option{font-size:15px}
  <div id="cryptoCards">
   <section class="card crypto-card">
    <img class="logo exchange-logo" id="mexcLogo" alt="MEXC logo">
+   <div class="info-wrap"><button class="info-btn" type="button" aria-label="Spot / Futures rebate" aria-describedby="tip_mexcLogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.6"/><circle cx="12" cy="7.6" r=".5" fill="currentColor"/></svg></button><div class="info-tip" id="tip_mexcLogo" role="tooltip"><span>Spot</span><b>20%</b><span>Futures</span><b>20%</b></div></div>
    <div class="card-content">
     <div class="badge">CRYPTO</div>
     <h2>MEXC</h2>
@@ -244,6 +259,7 @@ html:not([lang="en"]) .option{font-size:15px}
 
   <section class="card crypto-card" style="margin-top:18px">
    <img class="logo" id="gateLogo" alt="Gate logo">
+   <div class="info-wrap"><button class="info-btn" type="button" aria-label="Spot / Futures rebate" aria-describedby="tip_gateLogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.6"/><circle cx="12" cy="7.6" r=".5" fill="currentColor"/></svg></button><div class="info-tip" id="tip_gateLogo" role="tooltip"><span>Spot</span><b>20%</b><span>Futures</span><b>10%</b></div></div>
    <div class="card-content">
     <div class="badge">CRYPTO</div>
     <h2>Gate</h2>
@@ -256,6 +272,7 @@ html:not([lang="en"]) .option{font-size:15px}
 
   <section class="card crypto-card" style="margin-top:18px">
    <img class="logo exchange-logo" id="bingxLogo" alt="BingX logo">
+   <div class="info-wrap"><button class="info-btn" type="button" aria-label="Spot / Futures rebate" aria-describedby="tip_bingxLogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.6"/><circle cx="12" cy="7.6" r=".5" fill="currentColor"/></svg></button><div class="info-tip" id="tip_bingxLogo" role="tooltip"><span>Spot</span><b>5%</b><span>Futures</span><b>5%</b></div></div>
    <div class="card-content">
     <div class="badge">CRYPTO</div>
     <h2>BingX</h2>
@@ -280,6 +297,7 @@ html:not([lang="en"]) .option{font-size:15px}
 
   <section class="card crypto-card" style="margin-top:18px">
    <img class="logo exchange-logo" id="kucoinLogo" alt="KuCoin logo">
+   <div class="info-wrap"><button class="info-btn" type="button" aria-label="Spot / Futures rebate" aria-describedby="tip_kucoinLogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.6"/><circle cx="12" cy="7.6" r=".5" fill="currentColor"/></svg></button><div class="info-tip" id="tip_kucoinLogo" role="tooltip"><span>Spot</span><b>10%</b><span>Futures</span><b>10%</b></div></div>
    <div class="card-content">
     <div class="badge">CRYPTO</div>
     <h2>KuCoin</h2>
@@ -379,6 +397,7 @@ html:not([lang="en"]) .option{font-size:15px}
  </section>
  <section class="card" id="propCard">
   <img class="logo exchange-logo" id="asterLogo" alt="Aster logo">
+   <div class="info-wrap"><button class="info-btn" type="button" aria-label="Spot / Futures rebate" aria-describedby="tip_asterLogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.6"/><circle cx="12" cy="7.6" r=".5" fill="currentColor"/></svg></button><div class="info-tip" id="tip_asterLogo" role="tooltip"><span>Spot</span><b>10%</b><span>Futures</span><b>10%</b></div></div>
   <div class="card-content">
    <div class="badge">PERP DEX</div>
    <h2>Aster</h2>
@@ -553,6 +572,19 @@ function applyLang(l,save){
  document.addEventListener("click",e=>{if(!document.getElementById("sup").contains(e.target))set(false)});
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden){set(false);fab.focus()}});
  applyLang(curLang,false);
+})();
+
+(function(){
+ const touch=window.matchMedia&&window.matchMedia("(hover:none)").matches;
+ document.querySelectorAll(".info-wrap").forEach(w=>{
+  w.querySelector(".info-btn").addEventListener("click",e=>{
+   e.stopPropagation();
+   const on=w.classList.contains("on");
+   document.querySelectorAll(".info-wrap.on").forEach(x=>x.classList.remove("on"));
+   if(touch&&!on)w.classList.add("on");
+  });
+ });
+ document.addEventListener("click",()=>document.querySelectorAll(".info-wrap.on").forEach(x=>x.classList.remove("on")));
 })();
 
 cryptoTab.addEventListener("click",()=>setMode("crypto"));
