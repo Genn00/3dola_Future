@@ -343,16 +343,16 @@ html:not([lang="en"]) .option{font-size:15px}
    </div>
   </section>
 
-<section class="card crypto-card locked" aria-disabled="true" aria-label="Temporarily suspended" style="margin-top:18px">
+<section class="card crypto-card" style="margin-top:18px">
    <img class="logo exchange-logo" id="ourbitLogo" alt="Ourbit logo">
-   <div class="info-wrap" inert><button class="info-btn" type="button" aria-label="Details" aria-describedby="tip_ourbitLogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.6"/><circle cx="12" cy="7.6" r=".5" fill="currentColor"/></svg></button><div class="info-tip" id="tip_ourbitLogo" role="tooltip"><span>Spot</span><b>30%</b><span>Futures</span><b>30%</b></div></div>
-   <div class="card-content" inert>
+   <div class="info-wrap"><button class="info-btn" type="button" aria-label="Details" aria-describedby="tip_ourbitLogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.6"/><circle cx="12" cy="7.6" r=".5" fill="currentColor"/></svg></button><div class="info-tip" id="tip_ourbitLogo" role="tooltip"><span>Spot</span><b>20%</b><span>Futures</span><b>20%</b></div></div>
+   <div class="card-content">
     <div class="badge">CRYPTO</div>
     <h2>Ourbit</h2>
     <p data-i18n="descCrypto" data-brand="Ourbit">Crypto trading with Ourbit.</p>
-    <div class="commission" data-i18n="bSF30">x</div>
-    <div class="code-box" role="button" tabindex="0" data-code="3dolaFuture" aria-label="Copy referral code 3dolaFuture"><span class="code-label" data-i18n="code">CODE</span><span class="code-value">3dolaFuture</span><span class="code-copy" data-i18n="copy">Copy</span></div>
-    <a class="btn ourbit" href="https://www.ourbit.com/register?inviteCode=3dolaFuture" target="_blank" rel="noopener noreferrer" data-i18n="go">Go to exchange</a>
+    <div class="commission" data-i18n="bFee20">Get a 20% fee rebate.</div>
+    <div class="code-box" role="button" tabindex="0" data-code="3Dola_Future" aria-label="Copy referral code 3Dola_Future"><span class="code-label" data-i18n="code">CODE</span><span class="code-value">3Dola_Future</span><span class="code-copy" data-i18n="copy">Copy</span></div>
+    <a class="btn ourbit" href="https://www.ourbit.com/register?inviteCode=DolaFuture" target="_blank" rel="noopener noreferrer" data-i18n="go">Go to exchange</a>
    </div>
   </section>
 
@@ -555,7 +555,7 @@ document.querySelectorAll(".code-box").forEach(box=>{
  EVENTS.forEach(ev=>{(new Date(ev.start).getTime()<=now?groups.ongoing:groups.upcoming).push(ev)});
  function exchangeNames(){
   const out=[];
-  document.querySelectorAll("#cryptoCards .card:not(.locked) h2,#forexCards .card:not(.locked) h2,#propCards .card:not(.locked) h2").forEach(e=>{const n=e.textContent.trim();if(n&&out.indexOf(n)<0)out.push(n)});
+  document.querySelectorAll("#cryptoCards .card:not(.locked) h2,#forexCards .card:not(.locked) h2,#propCards .card:not(.locked) h2").forEach(e=>{const n=e.textContent.trim();if(n&&n!=="edgeX"&&out.indexOf(n)<0)out.push(n)});
   return out;
  }
  const TG="Official_3dola_future";
