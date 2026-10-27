@@ -555,7 +555,7 @@ document.querySelectorAll(".code-box").forEach(box=>{
  EVENTS.forEach(ev=>{(new Date(ev.start).getTime()<=now?groups.ongoing:groups.upcoming).push(ev)});
  function exchangeNames(){
   const out=[];
-  document.querySelectorAll("#cryptoCards .card:not(.locked) h2,#forexCards .card:not(.locked) h2,#propCards .card:not(.locked) h2").forEach(e=>{const n=e.textContent.trim();if(n&&n!=="edgeX"&&out.indexOf(n)<0)out.push(n)});
+  document.querySelectorAll("#cryptoCards .card:not(.locked) h2,#forexCards .card:not(.locked) h2,#propCards .card:not(.locked) h2").forEach(e=>{const n=e.textContent.trim();if(n&&out.indexOf(n)<0)out.push(n)});
   return out;
  }
  const TG="Official_3dola_future";
